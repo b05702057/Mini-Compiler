@@ -21,6 +21,7 @@ if(typeof process !== "undefined") {
   };
 }
 
+// parse, compile, and parse a WebAssembly format source to a module
 export async function run(source : string, config: any) : Promise<number> {
   const wabtInterface = await wabt();
   const parsed = parse(source);
@@ -33,8 +34,14 @@ export async function run(source : string, config: any) : Promise<number> {
   }
   const compiled = compiler.compile(source);
   const importObject = config.importObject;
+
+  // to use the existing functions
   const wasmSource = `(module
     (func $print (import "imports" "print") (param i32) (result i32))
+    (func $abs (import "imports" "abs") (param i32) (result i32))
+    (func $max (import "imports" "max") (param i32 i32) (result i32))
+    (func $min (import "imports" "min") (param i32 i32) (result i32))
+    (func $pow (import "imports" "pow") (param i32 i32) (result i32))
     (func (export "exported_func") ${returnType}
       ${compiled.wasmSource}
       ${returnExpr}

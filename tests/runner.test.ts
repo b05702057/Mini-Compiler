@@ -4,15 +4,18 @@ import 'mocha';
 
 const importObject = {
   imports: {
-    // we typically define print to mean logging to the console. To make testing
-    // the compiler easier, we define print so it logs to a string object.
-    //  We can then examine output to see what would have been printed in the
-    //  console.
+    // we typically define print to mean logging to the console. 
+    // To make testing the compiler easier, we define print so it logs to a string object.
+    //  We can then examine output to see what would have been printed in the console.
     print: (arg : any) => {
       importObject.output += arg;
       importObject.output += "\n";
       return arg;
     },
+    abs: Math.abs,
+    max: Math.max,
+    min: Math.min,
+    pow: Math.pow
   },
 
   output: ""
@@ -24,8 +27,8 @@ beforeEach(function () {
 });
   
 // We write end-to-end tests here to make sure the compiler works as expected.
-// You should write enough end-to-end tests until you are confident the compiler
-// runs as expected. 
+// You should write enough end-to-end tests 
+// until you are confident the compiler runs as expected. 
 describe('run(source, config) function', () => {
   const config = { importObject };
   
