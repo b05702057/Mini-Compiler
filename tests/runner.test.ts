@@ -67,4 +67,8 @@ describe('run(source, config) function', () => {
   });
 
   // TODO: add additional tests here to ensure the compiler runs as expected
+  it('prints the function result right', async() => {
+    var result = await run("print(abs(-10))", config);
+    expect(config.importObject.output).to.equal("10\n");
+  });
 });
