@@ -1,5 +1,6 @@
 import { BinaryOperator } from "typescript"
 
+// The abstract syntax tree is a tree form of the parsed program.
 export type Stmt =
   | { tag: "define", name: string, value: Expr }
   | { tag: "expr", expr: Expr }

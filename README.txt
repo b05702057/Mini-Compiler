@@ -18,4 +18,4 @@ The code is actually really complicated and difficult to understand.
 It's not possible to finish this assignment in such a short time without his tutorial.
 
 3.
-I didn't work with others for this assignment, but I did ask a lot of questions on Piazze.
+I didn't work with others for this assignment, but I did ask a lot of questions on Piazza.
