@@ -1,3 +1,4 @@
+import { split } from 'ts-node';
 import { Stmt, Expr, BinOp } from './ast';
 import { parse } from "./parser";
 
@@ -24,9 +25,23 @@ export function compile(source: string) : CompileResult {
   definedVars.forEach(v => {
     localDefines.push(`(local $${v} i32)`);
   })
-  
   const commandGroups = ast.map((stmt) => codeGen(stmt));
   const commands = localDefines.concat([].concat.apply([], commandGroups));
+  const joinedCommands = commands.join("\n");
+  const commandList = joinedCommands.split("\n");
+  for (var i = 0; i < commandList.length; i++) {
+    const splitCommand = commandList[i].split(" "); 
+    if (splitCommand[0] === "(local.get") {
+      if (!definedVars.has(splitCommand[1].substring(1, splitCommand[1].length - 1))) {
+        throw new Error("ReferenceError");
+      }
+
+      console.log(commandList[i]); 
+      console.log(splitCommand);
+      console.log(splitCommand[1].substring(1, splitCommand[1].length - 1))
+      console.log(definedVars.has(splitCommand[1].substring(1, splitCommand[1].length - 1)));
+    }
+  }
   console.log("Generated: ", commands.join("\n"));
   return {
     wasmSource: commands.join("\n"),
