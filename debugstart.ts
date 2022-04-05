@@ -1,4 +1,5 @@
 import { parse } from "./parser";
+import { compile } from "./compiler"
 import { stringifyTree } from "./treeprinter";
 
 // A call expression is an expression that calls a function.
@@ -11,7 +12,10 @@ import { stringifyTree } from "./treeprinter";
 
 // var ast = parse("print(x)");
 
-var ast = parse("");
+// var ast = parse("");
 
-console.log("ast")
-console.log(JSON.stringify(ast, null, 2));
+// console.log("ast")
+// console.log(JSON.stringify(ast, null, 2));
+
+var result = compile("x = 5");
+console.log(result);
